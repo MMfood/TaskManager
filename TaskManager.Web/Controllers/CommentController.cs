@@ -10,8 +10,8 @@ using TaskManager.Web.Interfaces;
 using TaskManager.Web.Models;
 using System.Linq;
 
-namespace TaskManager.Web.Controllers
-{
+namespace TaskManager.Web.Controllers{
+
     public class CommentController : Controller
     {
         private readonly ICommentService commentService;
