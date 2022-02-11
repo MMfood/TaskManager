@@ -14,7 +14,7 @@ namespace TaskManager.Core.Services
     public class WorkService : IWorkService
     {
         private readonly IRepository<Work> workRepository;
-        private readonly IRepository<User> userRepository;
+        
         private readonly IRepository<UserWork> userWorkRepository;
 
         public WorkService(IRepository<Work> workRepository, IRepository<UserWork> userWorkRepository)
@@ -45,7 +45,6 @@ namespace TaskManager.Core.Services
                 {
                     var userWork = new UserWork
                     {
-                        //User = selectedUser,
                         UserId = selectedUser.UserId,
                         Work = work
                     };

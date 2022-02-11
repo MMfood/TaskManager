@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Services\CommentService.cs~RFb7d3ff.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.12" />

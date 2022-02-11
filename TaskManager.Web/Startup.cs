@@ -39,6 +39,7 @@ namespace TaskManager.Web
             services.AddDbContext<WorkContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));

@@ -22,10 +22,8 @@ namespace TaskManager.Infrastructure.Repositories
         public T Add(T entity)
         {
             context.Set<T>().Add(entity);
+            context.Entry(entity).State = EntityState.Unchanged;
             context.SaveChanges();
-
-           context.Entry(entity).State = EntityState.Detached;
-
             return entity;
         }
 
@@ -36,7 +34,7 @@ namespace TaskManager.Infrastructure.Repositories
             context.SaveChanges();
         }
 
-        public T Get(Guid id)
+        public T Get(string id)
         {
             var entity = context.Set<T>().Find(id);
 

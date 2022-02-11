@@ -16,6 +16,7 @@ namespace TaskManager.Core.Services
     {
         private readonly IRepository<Comment> commentRepository;
         private readonly IRepository<User> userRepository;
+        //private readonly IRepository<Work> workRepository;
         private readonly IWorkService workService;
         public CommentService(IWorkService workService, IRepository<Comment> commentRepository, IRepository<User> userRepository)
         {
@@ -50,6 +51,8 @@ namespace TaskManager.Core.Services
                 comment.Work.NextActionDate = reminderDate;
             }
 
+            //userRepository.Add(currentUser);
+            //workRepository.Add(findWork);
             commentRepository.Add(comment);
             return comment;
         }

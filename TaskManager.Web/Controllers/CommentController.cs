@@ -44,7 +44,7 @@ namespace TaskManager.Web.Controllers
             {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-                var newComment = this.commentService.CreateComment(viewModel.Text, userId, viewModel.WorkId, viewModel.ReminderDate, viewModel.TypeCommentId);
+                var newComment = commentService.CreateComment(viewModel.Text, userId, viewModel.WorkId, viewModel.ReminderDate, viewModel.TypeCommentId);
 
                 return RedirectToAction("Index", "Work");
 
