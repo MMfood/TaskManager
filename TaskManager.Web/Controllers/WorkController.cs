@@ -94,6 +94,21 @@ namespace TaskManager.Web.Controllers
             return RedirectToAction("Index", "Work");
         }
 
+
+        [HttpGet]
+        [Authorize(Roles = "Manager")]
+        public IActionResult Delete(Guid Id)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
+            this.workService.DeleteWork(Id);
+
+            return RedirectToAction("Index", "Work");
+        }
+
         [HttpGet]
         public IActionResult Details(Guid id)
         {

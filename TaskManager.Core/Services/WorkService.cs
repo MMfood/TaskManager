@@ -39,6 +39,9 @@ namespace TaskManager.Core.Services
                 DueDate = dueDate,
                 CreatedOn = DateTime.Now,
             };
+
+            workRepository.Add(work);
+
             foreach (var selectedUser in selectedUsers)
             {
                 if (selectedUser.IsChecked)
@@ -46,13 +49,12 @@ namespace TaskManager.Core.Services
                     var userWork = new UserWork
                     {
                         UserId = selectedUser.UserId,
-                        Work = work
+                        Work = null,
+                        WorkId = workRepository.Get(workId).Id
                     };
                     userWorkRepository.Add(userWork);
                 }
             }
-
-             workRepository.Add(work);
 
             return work;
         }

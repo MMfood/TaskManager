@@ -16,13 +16,14 @@ namespace TaskManager.Core.Services
     {
         private readonly IRepository<Comment> commentRepository;
         private readonly IRepository<User> userRepository;
-        //private readonly IRepository<Work> workRepository;
+        private readonly IRepository<Work> workRepository;
         private readonly IWorkService workService;
-        public CommentService(IWorkService workService, IRepository<Comment> commentRepository, IRepository<User> userRepository)
+        public CommentService(IWorkService workService, IRepository<Comment> commentRepository, IRepository<User> userRepository, IRepository<Work> workRepository)
         {
             this.workService = workService;
             this.commentRepository = commentRepository;
             this.userRepository = userRepository;
+            this.workRepository = workRepository;
         }
         public Comment CreateComment(string text, string userId, Guid workId, DateTime? reminderDate, int typeCommentId)
         {
@@ -38,22 +39,23 @@ namespace TaskManager.Core.Services
                 Id = commentId,
                 Text = text,
                 UserId = userId,
-                Work = findWork,
+                Work = null,
                 WorkId = workId,
                 CreatedOn = DateTime.Now,
                 TypeCommentId = typeCommentId,
-                User = currentUser,
+                User = null,
                 ReminderDate = reminderDate
             };
 
+            
             if (reminderDate != null)
             {
-                comment.Work.NextActionDate = reminderDate;
+                var work = workRepository.Get(workId);
+                work.NextActionDate = reminderDate;
             }
-
-            //userRepository.Add(currentUser);
-            //workRepository.Add(findWork);
+            
             commentRepository.Add(comment);
+            //var testcomment = commentRepository.Get(commentId);
             return comment;
         }
         public List<Comment> SearchAllComments(int workId, string text)

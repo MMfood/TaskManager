@@ -9,7 +9,7 @@ namespace TaskManager.Core.Interfaces
     public interface IRepository<T>
          where T : class
     {
-        T Get(string id);
+        T Get(Guid id);
         T Get(ISpecification<T> specification);
         IList<T> List();
         IList<T> List(ISpecification<T> specification);

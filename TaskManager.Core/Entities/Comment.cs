@@ -8,7 +8,7 @@ namespace TaskManager.Core.Entities
 {
     public class Comment 
     {
-        [Required]
+        
         public string Text { get; set; }
         public DateTime? ReminderDate { get; set; }
         public Guid WorkId { get; set; }
