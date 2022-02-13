@@ -28,9 +28,11 @@ namespace TaskManager.Web.Controllers
 
         public IActionResult Index()
         {
-            var works = this.workService.GetAll();
-
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var works = this.workService.GetAllWorksForUser(userId);
+            var testWorks = this.workService.GetAll();
             var workViewModel = new List<WorkViewModel>();
+
             foreach (var work in works)
             {
                 workViewModel.Add(this.workMapper.Map(work));

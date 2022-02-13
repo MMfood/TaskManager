@@ -8,12 +8,12 @@
     @if (User.IsInRole("Admin"))
 {
     <p>@User.Identity.Name</p>
-    <a asp-controller="Users" asp-action="Index">Управление пользователями</a>
-    <a asp-controller="Roles" asp-action="Index">Управление ролями</a>
+    <a class="btn btn-primary" asp-controller="Users" asp-action="Index">Управление пользователями</a>
+    <a class="btn btn-primary" asp-controller="Roles" asp-action="Index">Управление ролями</a>
 }
 }
 else
 {
-    <a asp-controller="Account" asp-action="Login">Вход</a>
-    <a asp-controller="Account" asp-action="Register">Регистрация</a>
+    <a class="btn btn-primary" asp-controller="Account" asp-action="Login">Вход</a>
+    <a class="btn btn-primary" asp-controller="Account" asp-action="Register">Регистрация</a>
 }

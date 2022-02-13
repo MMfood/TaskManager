@@ -12,5 +12,7 @@ namespace TaskManager.Core.Interfaces
         bool DeleteWork(Guid workId);
         public Work FindWorkById(Guid id);
         Work EditWork(Guid workId, string workName, string description, DateTime? dueDate, int statusWorkId, ICollection<UserConstruct> selectedUsers);
+
+        List<Work> GetAllWorksForUser(string userId);
     }
 }

@@ -17,10 +17,13 @@ namespace TaskManager.Core.Services
         
         private readonly IRepository<UserWork> userWorkRepository;
 
-        public WorkService(IRepository<Work> workRepository, IRepository<UserWork> userWorkRepository)
+        private readonly IUserService userService;
+
+        public WorkService(IRepository<Work> workRepository, IRepository<UserWork> userWorkRepository, IUserService userService)
         {
             this.workRepository = workRepository;
             this.userWorkRepository = userWorkRepository;
+            this.userService = userService;
         }
 
         public Work CreateWork(string workName, string description, string userId, DateTime? dueDate, int typeWork, ICollection<UserConstruct> selectedUsers, DateTime? nextActionDate = null)
@@ -114,6 +117,30 @@ namespace TaskManager.Core.Services
                 .FirstOrDefault(x => x.Id == id);
 
             return work;
+        }
+
+        public List<Work> GetAllWorksForUser(string userId)
+        {
+            var userworks = userWorkRepository
+                .List(new WorksGetAllByUserSpesification(userId));
+
+            var works = workRepository
+                .List()
+                .Join(userworks,
+                x => x.Id,
+                y => y.WorkId,
+                (x, y) => new Work
+                {
+                    Id = x.Id,
+                    WorkName = x.WorkName,
+                    UserId = Guid.Parse(y.UserId),
+                    Description = x.Description,
+                    TypeWorkId = x.TypeWorkId,
+                    DueDate = x.DueDate,
+                    CreatedOn = x.CreatedOn
+                })
+                .ToList();
+            return works;
         }
     }
 }
