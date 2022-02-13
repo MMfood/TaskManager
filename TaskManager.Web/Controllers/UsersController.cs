@@ -4,16 +4,23 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using TaskManager.Core.Entities;
 using TaskManager.Web.Models;
+using TaskManager.Core.Interfaces;
+using TaskManager.Web.Interfaces;
+using System;
 
 namespace TaskManager.Web.Controllers
 {
     public class UsersController : Controller
     {
+        private readonly ICommentService commentService;
+        private readonly IWorkService workService;
         UserManager<User> _userManager;
 
-        public UsersController(UserManager<User> userManager)
+        public UsersController(UserManager<User> userManager, ICommentService commentService, IWorkService workService)
         {
             _userManager = userManager;
+            this.commentService = commentService;
+            this.workService = workService;
         }
 
         public IActionResult Index() => View(_userManager.Users.ToList());
@@ -126,8 +133,31 @@ namespace TaskManager.Web.Controllers
         public async Task<ActionResult> Delete(string id)
         {
             User user = await _userManager.FindByIdAsync(id);
+            bool IsRole = await _userManager.IsInRoleAsync(user, "Manager");
             if (user != null)
             {
+                if (IsRole)
+                {
+                    var works = workService.GetAll();
+                    if (works != null)
+                    {
+                        foreach (var work in works)
+                        {
+                            if (work.UserId == Guid.Parse(id))
+                            {
+                                workService.DeleteWork(work.Id);
+                            }
+                        }
+                    }
+                }
+                var comments = commentService.GetAllCommentsForUser(id);
+                if (comments != null)
+                {
+                    foreach (var comment in comments)
+                    {
+                        commentService.DeleteComment(comment.Id);
+                    }
+                }
                 IdentityResult result = await _userManager.DeleteAsync(user);
             }
             return RedirectToAction("Index");

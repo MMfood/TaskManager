@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaskManager.Infrastructure.Data;
 
 namespace TaskManager.Infrastructure.Migrations
 {
     [DbContext(typeof(WorkContext))]
-    partial class WorkContextModelSnapshot : ModelSnapshot
+    [Migration("20220213081438_adminadmin")]
+    partial class adminadmin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -377,13 +379,13 @@ namespace TaskManager.Infrastructure.Migrations
                         {
                             Id = "79e7930c-3df5-4261-99cf-0352eb018a91",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "89c892b9-b5aa-4257-af73-0d99af3e977d",
+                            ConcurrencyStamp = "5e567f8d-facf-4be6-b82b-8fd18f260ae2",
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDIFho39WuhiDFMrOqWRUAfNHYjGG4LxwqzwG2BTiMuupQCd/PvG1zi/0ZMdH5N8qg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH46Obe1GEaQVmfxXd34wW4GMMVBVXsKe7fzQu7S5iYoijMaToLyIpaiNTR5yhFQTg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "6I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN",
                             TwoFactorEnabled = false,
@@ -469,21 +471,21 @@ namespace TaskManager.Infrastructure.Migrations
                         new
                         {
                             Id = "a5e38752-84ae-4352-a0b6-bf47b3fd460a",
-                            ConcurrencyStamp = "570c3229-bbab-4581-b7d1-01860d923e78",
+                            ConcurrencyStamp = "5ad69cc4-713c-448d-97c4-3aa2c510bceb",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
                             Id = "a6e38752-84ae-4352-a0b6-bf47b3fd460a",
-                            ConcurrencyStamp = "594b0810-2c0f-4c16-b842-d8bf386680de",
+                            ConcurrencyStamp = "9d77e840-65cd-4a1c-951b-22008e5b92f5",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "d90e75c6-7da9-490e-aeb0-3d8c4827e193",
-                            ConcurrencyStamp = "e9efe8ed-7ae9-4cf0-bea9-6376b56861aa",
+                            ConcurrencyStamp = "8f39ab83-a78e-4332-81a7-5eddaf91e064",
                             Name = "Performer",
                             NormalizedName = "PERFORMER"
                         });

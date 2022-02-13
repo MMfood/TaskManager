@@ -118,5 +118,12 @@ namespace TaskManager.Core.Services
             return comment;
         }
 
+        public List<Comment> GetAllCommentsForUser(string userId)
+        {
+            return commentRepository
+                .List(new CommentGetAllByUserIdSpesification(userId))
+                .ToList();
+        }
+
     }
 }

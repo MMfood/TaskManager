@@ -13,5 +13,7 @@ namespace TaskManager.Core.Interfaces
         Comment FindCommentById(Guid id);
         Comment EditComment(Guid commentId, string text, string userId, int commentTypeId, DateTime? reminderDate);
         bool DeleteComment(Guid commentId);
+
+        List<Comment> GetAllCommentsForUser(string userId);
     }
 }
