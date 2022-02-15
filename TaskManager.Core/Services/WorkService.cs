@@ -135,6 +135,7 @@ namespace TaskManager.Core.Services
                     WorkName = x.WorkName,
                     UserId = Guid.Parse(y.UserId),
                     Description = x.Description,
+                    StatusWorkId = x.StatusWorkId,
                     TypeWorkId = x.TypeWorkId,
                     DueDate = x.DueDate,
                     CreatedOn = x.CreatedOn

@@ -30,7 +30,7 @@ namespace TaskManager.Web.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var works = this.workService.GetAllWorksForUser(userId);
-            var testWorks = this.workService.GetAll();
+            //var testWorks = this.workService.GetAll();
             var workViewModel = new List<WorkViewModel>();
 
             foreach (var work in works)
@@ -59,15 +59,18 @@ namespace TaskManager.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(WorkViewModel workViewModel)
         {
-            if (!this.ModelState.IsValid)
+            try
             {
-                return this.View();
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                this.workService.CreateWork(workViewModel.WorkName, workViewModel.Description, userId, workViewModel.DueTime, workViewModel.TypeWork, workViewModel.AllUsers, workViewModel.NextActionDate);
+
+
+                return RedirectToAction("Index", "Work");
             }
-
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            this.workService.CreateWork(workViewModel.WorkName, workViewModel.Description, userId, workViewModel.DueTime, workViewModel.TypeWork, workViewModel.AllUsers, workViewModel.NextActionDate);
-
-            return RedirectToAction("Index", "Work");
+            catch (Exception)
+            {
+                return RedirectToAction("Create", workViewModel.Id);
+            }
         }
 
         [HttpGet]
