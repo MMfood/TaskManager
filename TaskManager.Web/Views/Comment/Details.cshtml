@@ -70,7 +70,10 @@
                     @Html.DisplayFor(modelItem => item.CreatedOn)
                 </td>
                 <td>
-                    <a asp-controller="Comment" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    @if (item.UserName == User.Identity.Name)
+                    {
+                     <a asp-controller="Comment" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    }
                 </td>
                 @if (User.IsInRole("Manager"))
                 {
